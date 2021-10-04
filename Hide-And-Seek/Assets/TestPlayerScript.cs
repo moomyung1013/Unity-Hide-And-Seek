@@ -22,10 +22,6 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks
     
     private Vector3 m_currentDirection = Vector3.zero;
 
-    private float m_jumpTimeStamp = 0;
-    private float m_minJumpInterval = 0.1f;
-    
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();

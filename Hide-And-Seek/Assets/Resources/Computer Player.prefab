@@ -717,6 +717,7 @@ GameObject:
   - component: {fileID: 743934740475071527}
   - component: {fileID: 3667598710613932573}
   - component: {fileID: 9174742992168318047}
+  - component: {fileID: -6042065181293261971}
   m_Layer: 0
   m_Name: Computer Player
   m_TagString: Computer
@@ -863,6 +864,21 @@ MonoBehaviour:
     LayerIndex: 0
   - SynchronizeType: 0
     LayerIndex: 1
+--- !u!114 &-6042065181293261971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5756388337307830431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d430d8c56ef0c6e48a1418cffa0302cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  turnSpeed: 70
+  computer_animator: {fileID: 5756388337317198621}
 --- !u!1 &5756388337307830433
 GameObject:
   m_ObjectHideFlags: 0
