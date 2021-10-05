@@ -1552,6 +1552,7 @@ MonoBehaviour:
   m_turnSpeed: 70
   m_jumpForce: 4
   m_animator: {fileID: 4785184780649825847}
+  isChat: 0
 --- !u!114 &565294325883597069
 MonoBehaviour:
   m_ObjectHideFlags: 0

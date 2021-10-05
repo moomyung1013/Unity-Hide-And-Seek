@@ -9,11 +9,12 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
     public GameObject ScaleDistance;
     public GameObject RayResult; // 충돌 위치 출력 결과
 
-    GameObject director;
+    GameObject director, player;
 
     private void Start()
     {
         director = GameObject.Find("GameDirector");
+        player = GameObject.Find("Player3");
     }
 
     void Update()
@@ -23,7 +24,6 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("레이캐스트 테스트");
             photonView.RPC("Laser", RpcTarget.Others, null);
             Laser();
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityStandardAssets.Utility;
+using UnityEngine.UI;
 
 public class TestPlayerScript : MonoBehaviourPunCallbacks
 {
@@ -19,11 +20,19 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks
     private float m_currentH = 0; //현재 가상 수평선 위치
     private readonly float m_interpolation = 10;
     private readonly float m_backwardRunScale = 0.9f;
-    
     private Vector3 m_currentDirection = Vector3.zero;
+
+    private GameObject manager, ChatInput;
+    public bool isChat;
 
     private void Start()
     {
+        manager = GameObject.Find("NetworkManager");
+        ChatInput = GameObject.Find("ChatInputView");
+        if(ChatInput.activeSelf == true)
+            ChatInput.SetActive(false);
+        isChat = false;
+
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(0, -1.5f, 0); // 무게 중심점을 변경
         tr = GetComponent<Transform>();
@@ -40,13 +49,18 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks
 
         float v = Input.GetAxis("Vertical"); //상하 이동 W키 : 0~1, S키: -1~0
         float h = Input.GetAxis("Horizontal"); //좌우 이동 D키: 0~1, A키: -1~0
-        //float y_rot = 0;
-        if (Input.GetMouseButton(0)) //마우스 왼쪽 버튼을 눌렀을 때
+
+        if(Input.GetKeyDown(KeyCode.Return))
         {
-            float y_rot = Input.GetAxisRaw("Mouse X");
-            transform.Rotate(0, y_rot * m_turnSpeed * Time.deltaTime, 0); //로테이션
+            if (ChatInput.activeSelf == false)
+                ChatInput.SetActive(true);
+            else
+            {
+                manager.GetComponent<NetworkManager>().Send();
+                ChatInput.SetActive(false);
+            }
         }
-        //PV.RPC("TankUpdate", RpcTarget.AllBuffered, v, h, y_rot);
+        
         if (v < 0)
         { //s일때 뒤로 걷는 속도 적용
             v *= m_backwardRunScale;

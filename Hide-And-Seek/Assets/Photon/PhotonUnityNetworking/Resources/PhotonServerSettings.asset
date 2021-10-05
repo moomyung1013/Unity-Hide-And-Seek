@@ -37,5 +37,7 @@ MonoBehaviour:
   - FlipXRPC
   - TankUpdate
   - Laser
+  - ChatRPC
+  - CreateComputerPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 0

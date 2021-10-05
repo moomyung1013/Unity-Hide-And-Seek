@@ -3,7 +3,9 @@ ScriptsOnlyBuild:
     Assembly-CSharp-firstpass.dll:
     - UnityStandardAssets.Utility.SmoothFollow
     Assembly-CSharp.dll:
+    - ComputerScript
     - Effect_Raycast_Laser
+    - GameDirector
     - LaserScript
     - NetworkManager
     - TestPlayerScript
@@ -17,6 +19,8 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
+    PhotonUnityNetworking.Editor.dll:
+    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbodyView
@@ -34,20 +38,26 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
     UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.Button
+    - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
+    - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.InputField
     - UnityEngine.UI.Shadow
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
+    - UnityEngine.UI.VerticalLayoutGroup
     com.unity.multiplayer-hlapi.Runtime.dll:
     - UnityEngine.Networking.NetworkCallbacks
   sceneClasses:
@@ -93,51 +103,71 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11302}
+      Script: {instanceID: 11218}
     - Class: 114
-      Script: {instanceID: 11394}
+      Script: {instanceID: 11314}
     - Class: 114
-      Script: {instanceID: 11416}
+      Script: {instanceID: 11406}
     - Class: 114
-      Script: {instanceID: 11460}
+      Script: {instanceID: 11428}
     - Class: 114
-      Script: {instanceID: 11512}
+      Script: {instanceID: 11472}
     - Class: 114
-      Script: {instanceID: 11994}
+      Script: {instanceID: 11524}
     - Class: 114
-      Script: {instanceID: 12198}
+      Script: {instanceID: 11664}
     - Class: 114
-      Script: {instanceID: 12478}
+      Script: {instanceID: 12006}
     - Class: 114
-      Script: {instanceID: 12484}
+      Script: {instanceID: 12118}
     - Class: 114
-      Script: {instanceID: 12522}
+      Script: {instanceID: 12210}
     - Class: 114
-      Script: {instanceID: 12570}
+      Script: {instanceID: 12290}
     - Class: 114
-      Script: {instanceID: 12774}
+      Script: {instanceID: 12492}
     - Class: 114
-      Script: {instanceID: 12864}
+      Script: {instanceID: 12498}
     - Class: 114
-      Script: {instanceID: 12958}
+      Script: {instanceID: 12536}
     - Class: 114
-      Script: {instanceID: 12968}
+      Script: {instanceID: 12584}
     - Class: 114
-      Script: {instanceID: 13052}
+      Script: {instanceID: 12728}
     - Class: 114
-      Script: {instanceID: 13214}
+      Script: {instanceID: 12788}
     - Class: 114
-      Script: {instanceID: 13232}
+      Script: {instanceID: 12862}
     - Class: 114
-      Script: {instanceID: 13242}
+      Script: {instanceID: 12878}
     - Class: 114
-      Script: {instanceID: 13830}
+      Script: {instanceID: 12972}
     - Class: 114
-      Script: {instanceID: 13974}
+      Script: {instanceID: 12982}
     - Class: 114
-      Script: {instanceID: 13982}
+      Script: {instanceID: 12994}
     - Class: 114
-      Script: {instanceID: 97838}
+      Script: {instanceID: 13066}
+    - Class: 114
+      Script: {instanceID: 13228}
+    - Class: 114
+      Script: {instanceID: 13246}
+    - Class: 114
+      Script: {instanceID: 13258}
+    - Class: 114
+      Script: {instanceID: 13418}
+    - Class: 114
+      Script: {instanceID: 13662}
+    - Class: 114
+      Script: {instanceID: 13794}
+    - Class: 114
+      Script: {instanceID: 13850}
+    - Class: 114
+      Script: {instanceID: 13960}
+    - Class: 114
+      Script: {instanceID: 13994}
+    - Class: 114
+      Script: {instanceID: 14002}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -169,6 +199,8 @@ ScriptsOnlyBuild:
     - Class: 218
       Script: {instanceID: 0}
     - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
@@ -249,7 +281,7 @@ ScriptsOnlyBuild:
     className: ServerAddressProperty
   - hash:
       serializedVersion: 2
-      Hash: 1213be951b532a0994215146e1ee8c19
+      Hash: a9e46a030b88bca388db8f3bc892b6b3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: NetworkManager
@@ -735,6 +767,12 @@ ScriptsOnlyBuild:
     className: NetworkLobbyManager
   - hash:
       serializedVersion: 2
+      Hash: 29e5473bd86d8c4805e1cc799d767d1f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ComputerScript
+  - hash:
+      serializedVersion: 2
       Hash: 5887ef1bc706b22b773d253fd443ceef
     assemblyName: com.unity.multiplayer-hlapi.Runtime.dll
     namespaceName: UnityEngine.Networking
@@ -1125,7 +1163,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: a9bdd6efaa3f1b0efcc0c831a95eeab7
+      Hash: 10ba5a4deda379a3fdad19d3f7593872
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TestPlayerScript
@@ -1207,6 +1245,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.PunBasics
     className: PlayerManager
+  - hash:
+      serializedVersion: 2
+      Hash: c5eecf785acf4f5b153816339d134160
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LaserWand
   - hash:
       serializedVersion: 2
       Hash: a8d3c943d9168cbdd8596f040ff02ff4
@@ -1365,6 +1409,12 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
+      Hash: ed5ee69ffc83ebddf0954e6ef832cd7c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameDirector
+  - hash:
+      serializedVersion: 2
       Hash: e6ae40841db498b6e673877ac45ad208
     assemblyName: com.unity.multiplayer-hlapi.Runtime.dll
     namespaceName: UnityEngine.Networking
@@ -1429,6 +1479,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.SlotRacer.Utils
     className: Line
+  - hash:
+      serializedVersion: 2
+      Hash: 3c41680be246b9059353afbf34d458cf
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Effect_Raycast_Laser
   - hash:
       serializedVersion: 2
       Hash: 3165968ba45c74472d279ba04455fccb
@@ -1633,18 +1689,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: c5eecf785acf4f5b153816339d134160
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: LaserWand
-  - hash:
-      serializedVersion: 2
-      Hash: 3c41680be246b9059353afbf34d458cf
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Effect_Raycast_Laser
   platform: 19
   scenePathNames:
   - Assets/Scenes/TestScene.unity

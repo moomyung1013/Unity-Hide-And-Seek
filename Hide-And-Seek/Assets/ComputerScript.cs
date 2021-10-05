@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
-public class ComputerScript : MonoBehaviour
+public class ComputerScript : MonoBehaviourPunCallbacks
 {
     public float speed, turnSpeed;
     public Animator computer_animator;
@@ -16,12 +18,17 @@ public class ComputerScript : MonoBehaviour
 
     void Start()
     {
+        SetRandom();
+        state = UnityEngine.Random.Range(0, 3);
+    }
+
+    void SetRandom()
+    {
         time = UnityEngine.Random.Range(4.0f, 7.0f);
         rotateTime = UnityEngine.Random.Range(2.0f, 3.0f);
         stopTime = UnityEngine.Random.Range(1.0f, 3.0f);
         v = UnityEngine.Random.Range(-1.0f, 1.0f);
         h = UnityEngine.Random.Range(-1.0f, 1.0f);
-        state = UnityEngine.Random.Range(0, 3);
     }
 
     void Update()
@@ -45,9 +52,7 @@ public class ComputerScript : MonoBehaviour
                 }
                 else
                 {
-                    time = UnityEngine.Random.Range(4.0f, 7.0f);
-                    v = UnityEngine.Random.Range(-1.0f, 1.0f);
-                    h = UnityEngine.Random.Range(-1.0f, 1.0f);
+                    SetRandom();
                     state = 2;
                 }
                 break;
@@ -59,9 +64,7 @@ public class ComputerScript : MonoBehaviour
                 }
                 else
                 {
-                    rotateTime = UnityEngine.Random.Range(2.0f, 3.0f);
-                    v = UnityEngine.Random.Range(-1.0f, 1.0f);
-                    h = UnityEngine.Random.Range(-1.0f, 1.0f);
+                    SetRandom();
                     state = 0;
                 }
                 break;
@@ -70,9 +73,7 @@ public class ComputerScript : MonoBehaviour
                     stopTime -= Time.deltaTime;
                 else
                 {
-                    stopTime = UnityEngine.Random.Range(1.0f, 3.0f);
-                    v = UnityEngine.Random.Range(-1.0f, 1.0f);
-                    h = UnityEngine.Random.Range(-1.0f, 1.0f);
+                    SetRandom();
                     state = UnityEngine.Random.Range(0, 2);
                 }
                 break;
