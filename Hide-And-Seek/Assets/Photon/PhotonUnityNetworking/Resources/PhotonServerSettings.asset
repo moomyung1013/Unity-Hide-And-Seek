@@ -39,5 +39,7 @@ MonoBehaviour:
   - Laser
   - ChatRPC
   - CreateComputerPlayer
+  - UpdateUI
+  - RPCDestroy
   DisableAutoOpenWizard: 1
   ShowSettings: 0

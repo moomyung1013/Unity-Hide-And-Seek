@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
-public class ComputerScript : MonoBehaviourPunCallbacks
+public class ComputerScript : MonoBehaviourPunCallbacks, IPunObservable
 {
     public float speed, turnSpeed;
     public Animator computer_animator;
@@ -78,5 +78,11 @@ public class ComputerScript : MonoBehaviourPunCallbacks
                 }
                 break;
         }
+    }
+    [PunRPC]
+    public void RPCDestroy() => Destroy(gameObject);
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    { 
     }
 }

@@ -16,8 +16,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private List<Transform> positionsList = new List<Transform>();
     private Text[] chatList;
     private int idx;
-    private bool isComputer;
 
+
+    public ParticleSystem deathEffect;
+    public Text ComputerCountText, PlayerCountText;
+    public int totalComputerCount, totalPlayerCount;
+    int ComputerCount, PlayerCount;
 
     void Awake()
     {
@@ -28,9 +32,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Transform[] positions = GameObject.Find("SpawnPosition").GetComponentsInChildren<Transform>();
         chatList = chatView.GetComponentsInChildren<Text>();
-        isComputer = false;
         foreach (Transform pos in positions)
             positionsList.Add(pos);
+
+        ComputerCount = totalComputerCount;
+        PlayerCount = totalPlayerCount;
+        ComputerCountText.text = "Computer: " + ComputerCount.ToString() + " / " + totalComputerCount.ToString();
+        PlayerCountText.text = "Player: " + PlayerCount.ToString() + " / " + totalPlayerCount.ToString();
 
         startButton.onClick.AddListener(JoinRoom);
 
@@ -103,7 +111,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 4 });
     }
-    
+
+
+    public void ComputerDead(GameObject computer)
+    {
+        Vector3 hitPoint = computer.transform.position;
+        hitPoint.y += 1.5f;
+        Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitPoint)), deathEffect.main.startLifetimeMultiplier);
+        computer.GetComponent<PhotonView>().RPC("RPCDestroy", RpcTarget.AllBuffered);
+        ComputerCount -= 1;
+        PV.RPC("UpdateUI", RpcTarget.All);
+    }
 
     public void Send()
     {
@@ -134,11 +152,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [PunRPC]
     void CreateComputerPlayer()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 5; i++)
         {
             idx = Random.Range(1, positionsList.Count);
             PhotonNetwork.Instantiate("Computer Player", positionsList[idx].position, Quaternion.identity);
             positionsList.RemoveAt(idx);
         }
+    }
+
+    [PunRPC]
+    public void UpdateUI()
+    {
+        ComputerCountText.text = "Computer: " + ComputerCount.ToString() + " / " + totalComputerCount.ToString();
+        PlayerCountText.text = "Player: " + PlayerCount.ToString() + " / " + totalPlayerCount.ToString();
     }
 }

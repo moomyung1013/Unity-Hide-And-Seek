@@ -1472,6 +1472,12 @@ MonoBehaviour:
   chatView: {fileID: 391948731}
   gameVersion: 1.0
   PV: {fileID: 618619526}
+  deathEffect: {fileID: 6870543689452607470, guid: 9a45221fb4a0c0349a2a167a3f56dedc,
+    type: 3}
+  ComputerCountText: {fileID: 1732198112}
+  PlayerCountText: {fileID: 1711956031}
+  totalComputerCount: 5
+  totalPlayerCount: 4
 --- !u!4 &618619525
 Transform:
   m_ObjectHideFlags: 0
@@ -5506,13 +5512,18 @@ PrefabInstance:
     - target: {fileID: 4745692304508252346, guid: 40db008e1eb77b146b6e7d684d7feb98,
         type: 3}
       propertyPath: totalComputerCount
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4745692304508252346, guid: 40db008e1eb77b146b6e7d684d7feb98,
         type: 3}
       propertyPath: totalPlayerCount
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4745692304508252346, guid: 40db008e1eb77b146b6e7d684d7feb98,
+        type: 3}
+      propertyPath: PV
+      value: 
+      objectReference: {fileID: 618619526}
     - target: {fileID: 5442160717879517344, guid: 40db008e1eb77b146b6e7d684d7feb98,
         type: 3}
       propertyPath: m_Name

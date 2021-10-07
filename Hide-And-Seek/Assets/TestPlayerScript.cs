@@ -4,7 +4,7 @@ using Photon.Pun;
 using UnityStandardAssets.Utility;
 using UnityEngine.UI;
 
-public class TestPlayerScript : MonoBehaviourPunCallbacks
+public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 {
 
     public PhotonView PV;
@@ -28,9 +28,9 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks
     private void Start()
     {
         manager = GameObject.Find("NetworkManager");
-        ChatInput = GameObject.Find("ChatInputView");
-        if(ChatInput.activeSelf == true)
-            ChatInput.SetActive(false);
+        ChatInput = GameObject.Find("Canvas").transform.Find("ChatPanel").transform.Find("ChatInputView").gameObject;
+        //if(ChatInput.activeSelf == true)
+        ChatInput.SetActive(false);
         isChat = false;
 
         rb = GetComponent<Rigidbody>();
@@ -67,15 +67,19 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks
         }
 
         m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation); //상하 갱신
-        m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation); //좌우 갱신
-
-        //transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime; //상하 이동
-        //transform.position += transform.right * m_currentH * m_moveSpeed * Time.deltaTime; //좌우 이동
 
         tr.Translate(Vector3.forward * v * m_moveSpeed * Time.deltaTime);
         tr.Rotate(Vector3.up * h * m_turnSpeed * Time.deltaTime);
         m_animator.SetFloat("Speed", m_currentV); //애니메이션 갱신
     }
+
+    public void Dead()
+    {
+        PV.RPC("RPCDestroy", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    public void RPCDestroy() => Destroy(gameObject);
 
     [PunRPC]
     void TankUpdate(float v, float h, float y_rot)
@@ -97,5 +101,9 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks
         //tr.Translate(Vector3.forward * v * m_moveSpeed * Time.deltaTime);
         //tr.Rotate(Vector3.up * h * m_turnSpeed * Time.deltaTime);
         //m_animator.SetFloat("Direction", m_currentH); //애니메이션 갱신
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
     }
 }

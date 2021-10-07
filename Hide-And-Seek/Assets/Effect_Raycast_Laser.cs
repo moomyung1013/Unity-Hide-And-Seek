@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
 {
     public GameObject Raybody; //쏘는 위치
     public GameObject ScaleDistance;
     public GameObject RayResult; // 충돌 위치 출력 결과
+    public PhotonView PV;
 
     GameObject director, player;
 
     private void Start()
     {
-        director = GameObject.Find("GameDirector");
+        director = GameObject.Find("NetworkManager");
         player = GameObject.Find("Player3");
     }
 
@@ -32,29 +34,25 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
         //RayResult.transform.rotation = Quaternion.LookRotation(hit.normal);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("충돌");
-    }
     [PunRPC]
     void Laser()
     {
         RaycastHit hit;
-        Debug.DrawRay(Raybody.transform.position, ScaleDistance.transform.forward * 1.0f, Color.red, 3.0f);
         if (Physics.Raycast(Raybody.transform.position, ScaleDistance.transform.forward, out hit, 1.0f))
         {
-            if (hit.transform.tag == "Player")
+            if (!PV.IsMine && hit.transform.tag == "Player" && hit.transform.GetComponent<PhotonView>().IsMine)
             {
                 Debug.Log("플레이어와 충돌!");
-                GameObject player = hit.transform.gameObject;
-                director.GetComponent<GameDirector>().PlayerDead(player);
+                //GameObject player = hit.transform.gameObject;
+                //director.GetComponent<GameDirector>().PlayerDead(player);
+                hit.transform.GetComponent<TestPlayerScript>().Dead();
 
             }
             else if (hit.transform.tag == "Computer")
             {
                 Debug.Log("컴퓨터와 충돌!");
                 GameObject computer = hit.transform.gameObject;
-                director.GetComponent<GameDirector>().ComputerDead(computer);
+                director.GetComponent<NetworkManager>().ComputerDead(computer);
             }
         }
         ScaleDistance.SetActive(true);
