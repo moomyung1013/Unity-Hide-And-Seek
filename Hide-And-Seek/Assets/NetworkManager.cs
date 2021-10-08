@@ -21,7 +21,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public ParticleSystem deathEffect;
     public Text ComputerCountText, PlayerCountText;
     public int totalComputerCount, totalPlayerCount;
-    int ComputerCount, PlayerCount;
+    [SerializeField] int ComputerCount, PlayerCount;
 
     void Awake()
     {
@@ -119,7 +119,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Vector3 hitPoint = computer.transform.position;
         hitPoint.y += 1.5f;
-        ComputerCount -= 1;
         Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitPoint)), deathEffect.main.startLifetimeMultiplier);
         computer.GetComponent<PhotonView>().RPC("RPCDestroy", RpcTarget.AllBuffered);
         PV.RPC("UpdateUI", RpcTarget.All);
@@ -167,7 +166,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void UpdateUI()
     {
+        ComputerCount = ComputerCount - 1;
         ComputerCountText.text = "Computer: " + ComputerCount.ToString() + " / " + totalComputerCount.ToString();
         PlayerCountText.text = "Player: " + PlayerCount.ToString() + " / " + totalPlayerCount.ToString();
     }
+    
 }

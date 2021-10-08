@@ -806,7 +806,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 2
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 3667598710613932573}
@@ -880,6 +880,8 @@ MonoBehaviour:
   speed: 5
   turnSpeed: 70
   computer_animator: {fileID: 5756388337317198621}
+  deathEffect: {fileID: 6870543689452607470, guid: 9a45221fb4a0c0349a2a167a3f56dedc,
+    type: 3}
 --- !u!1 &5756388337307830433
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,7 +2122,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5756388337307407541}
-  - {fileID: 9001395248122542938}
+  - {fileID: 1410903234270583704}
   m_Father: {fileID: 5756388337307407741}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2535,7 +2537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78ddf7b872dee4742baf8777d682c741, type: 3}
---- !u!4 &9001395248122542938 stripped
+--- !u!4 &1410903234270583704 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8034395678939439732, guid: 78ddf7b872dee4742baf8777d682c741,
     type: 3}

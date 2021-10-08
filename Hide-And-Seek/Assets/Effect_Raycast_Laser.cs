@@ -15,7 +15,7 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        director = GameObject.Find("NetworkManager");
+        director = GameObject.Find("Computer Player");
         player = GameObject.Find("Player3");
     }
 
@@ -52,7 +52,7 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
             {
                 Debug.Log("컴퓨터와 충돌!");
                 GameObject computer = hit.transform.gameObject;
-                director.GetComponent<NetworkManager>().ComputerDead(computer);
+                computer.GetComponent<ComputerScript>().Dead(computer);
             }
         }
         ScaleDistance.SetActive(true);
