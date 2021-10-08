@@ -37,8 +37,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         ComputerCount = totalComputerCount;
         PlayerCount = totalPlayerCount;
-        ComputerCountText.text = "Computer: " + ComputerCount.ToString() + " / " + totalComputerCount.ToString();
-        PlayerCountText.text = "Player: " + PlayerCount.ToString() + " / " + totalPlayerCount.ToString();
 
         startButton.onClick.AddListener(JoinRoom);
 
@@ -76,12 +74,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         startPanel.SetActive(false);
         chatPanel.SetActive(true);
 
+        ComputerCountText.text = "Computer: " + ComputerCount.ToString() + " / " + totalComputerCount.ToString();
+        PlayerCountText.text = "Player: " + PlayerCount.ToString() + " / " + totalPlayerCount.ToString();
+
         ChatInput.text = "";
         foreach (Text chat in chatList)
             chat.text = "";
 
         if (PhotonNetwork.IsMasterClient)
         {
+            PV.RPC("ChatRPC", RpcTarget.All, "<color=yellow>[방장] " + PhotonNetwork.NickName + "님이 참가하셨습니다</color>");
             PV.RPC("CreateComputerPlayer", RpcTarget.All);
         }
         idx = Random.Range(1, positionsList.Count);
@@ -117,12 +119,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Vector3 hitPoint = computer.transform.position;
         hitPoint.y += 1.5f;
+        ComputerCount -= 1;
         Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitPoint)), deathEffect.main.startLifetimeMultiplier);
         computer.GetComponent<PhotonView>().RPC("RPCDestroy", RpcTarget.AllBuffered);
-        ComputerCount -= 1;
         PV.RPC("UpdateUI", RpcTarget.All);
     }
 
+    // 채팅 전송 함수
     public void Send()
     {
         if (ChatInput.text.Equals(""))
@@ -131,6 +134,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PV.RPC("ChatRPC", RpcTarget.All, msg);
         ChatInput.text = "";
     }
+
     [PunRPC]
     void ChatRPC(string msg)
     {
@@ -152,7 +156,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [PunRPC]
     void CreateComputerPlayer()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 10; i++)
         {
             idx = Random.Range(1, positionsList.Count);
             PhotonNetwork.Instantiate("Computer Player", positionsList[idx].position, Quaternion.identity);

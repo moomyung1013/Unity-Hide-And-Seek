@@ -215,7 +215,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &37678659
 PrefabInstance:
@@ -1444,6 +1444,7 @@ GameObject:
   - component: {fileID: 618619525}
   - component: {fileID: 618619524}
   - component: {fileID: 618619526}
+  - component: {fileID: 618619527}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -1476,7 +1477,7 @@ MonoBehaviour:
     type: 3}
   ComputerCountText: {fileID: 1732198112}
   PlayerCountText: {fileID: 1711956031}
-  totalComputerCount: 5
+  totalComputerCount: 10
   totalPlayerCount: 4
 --- !u!4 &618619525
 Transform:
@@ -1510,10 +1511,25 @@ MonoBehaviour:
   Synchronization: 0
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 618619527}
   viewIdField: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &618619527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618619523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &622701624
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,7 +2509,7 @@ RectTransform:
   - {fileID: 1668938380}
   - {fileID: 622701625}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4328,7 +4344,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Player: 4 / 4'
+  m_Text: 
 --- !u!222 &1711956032
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4435,7 +4451,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Computer: 4 / 16'
+  m_Text: 
 --- !u!222 &1732198113
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5431,103 +5447,3 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094714392}
   m_CullTransparentMesh: 0
---- !u!1001 &2301097089057575513
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2151129236526646707, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.7185965
-      objectReference: {fileID: 0}
-    - target: {fileID: 2151129236526646707, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.6691618
-      objectReference: {fileID: 0}
-    - target: {fileID: 2151129236526646707, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 28.334541
-      objectReference: {fileID: 0}
-    - target: {fileID: 2151129236526646707, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2151129236526646707, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2151129236526646707, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2151129236526646707, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2151129236526646707, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2151129236526646707, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2151129236526646707, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2151129236526646707, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4745692304508252346, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: deathEffect
-      value: 
-      objectReference: {fileID: 6870543689452607470, guid: 9a45221fb4a0c0349a2a167a3f56dedc,
-        type: 3}
-    - target: {fileID: 4745692304508252346, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: PlayerCountText
-      value: 
-      objectReference: {fileID: 1711956031}
-    - target: {fileID: 4745692304508252346, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: ComputerCountText
-      value: 
-      objectReference: {fileID: 1732198112}
-    - target: {fileID: 4745692304508252346, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: totalComputerCount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4745692304508252346, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: totalPlayerCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4745692304508252346, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: PV
-      value: 
-      objectReference: {fileID: 618619526}
-    - target: {fileID: 5442160717879517344, guid: 40db008e1eb77b146b6e7d684d7feb98,
-        type: 3}
-      propertyPath: m_Name
-      value: GameDirector
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 40db008e1eb77b146b6e7d684d7feb98, type: 3}

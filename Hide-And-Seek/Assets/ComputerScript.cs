@@ -9,9 +9,7 @@ public class ComputerScript : MonoBehaviourPunCallbacks, IPunObservable
 {
     public float speed, turnSpeed;
     public Animator computer_animator;
-
-    private float m_currentV = 0; //현재 가상 수직선 위치
-    private readonly float m_interpolation = 9;
+    
     private float v, h;
     private int state;
     private float time, rotateTime, stopTime;
@@ -30,7 +28,7 @@ public class ComputerScript : MonoBehaviourPunCallbacks, IPunObservable
         v = UnityEngine.Random.Range(-1.0f, 1.0f);
         h = UnityEngine.Random.Range(-1.0f, 1.0f);
     }
-
+    /*
     void Update()
     {
         switch (state)
@@ -79,6 +77,8 @@ public class ComputerScript : MonoBehaviourPunCallbacks, IPunObservable
                 break;
         }
     }
+    */
+
     [PunRPC]
     public void RPCDestroy() => Destroy(gameObject);
 
