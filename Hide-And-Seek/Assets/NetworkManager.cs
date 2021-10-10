@@ -17,12 +17,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private Text[] chatList;
     private int idx;
 
-
-    public ParticleSystem deathEffect;
-    public Text ComputerCountText, PlayerCountText;
-    public int totalComputerCount, totalPlayerCount;
-    [SerializeField] int ComputerCount, PlayerCount;
-
     void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -34,10 +28,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         chatList = chatView.GetComponentsInChildren<Text>();
         foreach (Transform pos in positions)
             positionsList.Add(pos);
-
-        ComputerCount = totalComputerCount;
-        PlayerCount = totalPlayerCount;
-
+        
         startButton.onClick.AddListener(JoinRoom);
 
         OnLogin();
@@ -73,9 +64,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         startPanel.SetActive(false);
         chatPanel.SetActive(true);
-
-        ComputerCountText.text = "Computer: " + ComputerCount.ToString() + " / " + totalComputerCount.ToString();
-        PlayerCountText.text = "Player: " + PlayerCount.ToString() + " / " + totalPlayerCount.ToString();
 
         ChatInput.text = "";
         foreach (Text chat in chatList)
@@ -114,16 +102,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 4 });
     }
 
-
-    public void ComputerDead(GameObject computer)
-    {
-        Vector3 hitPoint = computer.transform.position;
-        hitPoint.y += 1.5f;
-        Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitPoint)), deathEffect.main.startLifetimeMultiplier);
-        computer.GetComponent<PhotonView>().RPC("RPCDestroy", RpcTarget.AllBuffered);
-        PV.RPC("UpdateUI", RpcTarget.All);
-    }
-
+    
     // 채팅 전송 함수
     public void Send()
     {
@@ -161,14 +140,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             PhotonNetwork.Instantiate("Computer Player", positionsList[idx].position, Quaternion.identity);
             positionsList.RemoveAt(idx);
         }
-    }
-
-    [PunRPC]
-    public void UpdateUI()
-    {
-        ComputerCount = ComputerCount - 1;
-        ComputerCountText.text = "Computer: " + ComputerCount.ToString() + " / " + totalComputerCount.ToString();
-        PlayerCountText.text = "Player: " + PlayerCount.ToString() + " / " + totalPlayerCount.ToString();
     }
     
 }

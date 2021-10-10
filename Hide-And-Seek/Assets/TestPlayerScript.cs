@@ -8,6 +8,7 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 {
 
     public PhotonView PV;
+    public ParticleSystem deathEffect;
     public Rigidbody rb;
     private Transform tr;
 
@@ -73,9 +74,16 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         m_animator.SetFloat("Speed", m_currentV); //애니메이션 갱신
     }
 
-    public void Dead()
+    public void Dead(GameObject player)
     {
-        PV.RPC("RPCDestroy", RpcTarget.AllBuffered);
+        GameObject uiManager = GameObject.Find("UIManager");
+        GameManager.instance.AddScore("Player");
+
+        Vector3 hitPoint = player.transform.position;
+        hitPoint.y += 1.5f;
+        Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitPoint)), deathEffect.main.startLifetimeMultiplier);
+        player.SetActive(false);
+        //PV.RPC("RPCDestroy", RpcTarget.AllBuffered);
     }
 
     [PunRPC]

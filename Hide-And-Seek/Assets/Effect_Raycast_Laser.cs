@@ -43,9 +43,8 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
             if (!PV.IsMine && hit.transform.tag == "Player" && hit.transform.GetComponent<PhotonView>().IsMine)
             {
                 Debug.Log("플레이어와 충돌!");
-                //GameObject player = hit.transform.gameObject;
-                //director.GetComponent<GameDirector>().PlayerDead(player);
-                hit.transform.GetComponent<TestPlayerScript>().Dead();
+                GameObject player = hit.transform.gameObject;
+                hit.transform.GetComponent<TestPlayerScript>().Dead(player);
 
             }
             else if (hit.transform.tag == "Computer")
