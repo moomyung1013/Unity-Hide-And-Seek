@@ -1547,12 +1547,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PV: {fileID: 565294325883597069}
+  deathEffect: {fileID: 6870543689452607470, guid: 9a45221fb4a0c0349a2a167a3f56dedc,
+    type: 3}
   rb: {fileID: 4785184779138526650}
   m_moveSpeed: 5
   m_turnSpeed: 70
   m_jumpForce: 4
   m_animator: {fileID: 4785184780649825847}
   isChat: 0
+  nickname: 
 --- !u!114 &565294325883597069
 MonoBehaviour:
   m_ObjectHideFlags: 0
