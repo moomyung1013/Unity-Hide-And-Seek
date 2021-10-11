@@ -112,7 +112,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PV.RPC("ChatRPC", RpcTarget.All, msg);
         ChatInput.text = "";
     }
-
+    public void DeadSend(string msg) => PV.RPC("ChatRPC", RpcTarget.All, msg);
+    
     [PunRPC]
     void ChatRPC(string msg)
     {

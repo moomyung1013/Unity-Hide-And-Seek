@@ -10,15 +10,7 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
     public GameObject ScaleDistance;
     public GameObject RayResult; // 충돌 위치 출력 결과
     public PhotonView PV;
-
-    GameObject director, player;
-
-    private void Start()
-    {
-        director = GameObject.Find("Computer Player");
-        player = GameObject.Find("Player3");
-    }
-
+    
     void Update()
     {
 
@@ -42,16 +34,16 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
         {
             if (!PV.IsMine && hit.transform.tag == "Player" && hit.transform.GetComponent<PhotonView>().IsMine)
             {
-                Debug.Log("플레이어와 충돌!");
+                string attckNickname = PhotonNetwork.NickName;
                 GameObject player = hit.transform.gameObject;
-                hit.transform.GetComponent<TestPlayerScript>().Dead(player);
+                GameManager.instance.Dead(player);
 
             }
             else if (hit.transform.tag == "Computer")
             {
-                Debug.Log("컴퓨터와 충돌!");
                 GameObject computer = hit.transform.gameObject;
-                computer.GetComponent<ComputerScript>().Dead(computer);
+                GameManager.instance.Dead(computer);
+                //computer.GetComponent<ComputerScript>().Dead(computer);
             }
         }
         ScaleDistance.SetActive(true);

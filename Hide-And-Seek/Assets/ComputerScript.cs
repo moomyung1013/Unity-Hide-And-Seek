@@ -80,19 +80,7 @@ public class ComputerScript : MonoBehaviourPunCallbacks, IPunObservable
     }
     */
 
-
-    public void Dead(GameObject computer)
-    {
-        GameObject uiManager = GameObject.Find("UIManager");
-        GameManager.instance.AddScore("Computer");
-
-        Vector3 hitPoint = computer.transform.position;
-        hitPoint.y += 1.5f;
-        Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitPoint)), deathEffect.main.startLifetimeMultiplier);
-        computer.SetActive(false);
-        //photonView.RPC("RPCDestroy", RpcTarget.AllBuffered);
-    }
-
+        
     [PunRPC]
     public void RPCDestroy() => Destroy(gameObject);
 

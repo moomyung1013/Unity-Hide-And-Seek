@@ -24,7 +24,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private static GameManager m_instance; // 싱글톤이 할당될 static 변수
     public bool isGameover { get; private set; } // 게임 오버 상태
-    private int ComputerCount = 10, PlayerCount = 4;
+    public GameObject gameOverPanel;
+    public ParticleSystem deathEffect;
+    private int ComputerCount = 10, PlayerCount = 2;
 
     // 주기적으로 자동 실행되는, 동기화 메서드
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -63,20 +65,34 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     {
     }
 
+    public void Dead(GameObject obj)
+    {
+        AddScore(obj.tag);
+
+        Vector3 hitPoint = obj.transform.position;
+        hitPoint.y += 1.5f;
+        Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitPoint)), deathEffect.main.startLifetimeMultiplier);
+        obj.SetActive(false);
+    }
     // 점수를 추가하고 UI 갱신
     public void AddScore(string who)
     {
         if(who.Equals("Computer"))
             ComputerCount -= 1;
         else if(who.Equals("Player"))
+        {
             PlayerCount -= 1;
+            if (PlayerCount == 1)
+                photonView.RPC("EndGame", RpcTarget.All);
+        }
         // 점수 UI 텍스트 갱신
         UIManager.instance.UpdateScoreText(ComputerCount, PlayerCount);
     }
 
-    // 게임 오버 처리
+    [PunRPC]
     public void EndGame()
     {
+        gameOverPanel.SetActive(true);
     }
     
 }

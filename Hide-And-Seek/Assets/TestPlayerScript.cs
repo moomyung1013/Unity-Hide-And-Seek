@@ -25,6 +25,7 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
     private GameObject manager, ChatInput;
     public bool isChat;
+    public string nickname;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         //if(ChatInput.activeSelf == true)
         ChatInput.SetActive(false);
         isChat = false;
+        nickname = PhotonNetwork.NickName;
 
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(0, -1.5f, 0); // 무게 중심점을 변경
@@ -74,15 +76,12 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         m_animator.SetFloat("Speed", m_currentV); //애니메이션 갱신
     }
 
-    public void Dead(GameObject player)
+    public void Dead(GameObject player, string attackNickname)
     {
-        GameObject uiManager = GameObject.Find("UIManager");
-        GameManager.instance.AddScore("Player");
-
-        Vector3 hitPoint = player.transform.position;
-        hitPoint.y += 1.5f;
-        Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitPoint)), deathEffect.main.startLifetimeMultiplier);
-        player.SetActive(false);
+        string deadNickname = player.GetComponent<TestPlayerScript>().nickname;
+        string msg = "<color=red>" + attackNickname + "님이 " + deadNickname + "님을 아웃시켰습니다.</color>";
+        manager.GetComponent<NetworkManager>().DeadSend(msg);
+        
         //PV.RPC("RPCDestroy", RpcTarget.AllBuffered);
     }
 

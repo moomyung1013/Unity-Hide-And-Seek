@@ -56,5 +56,4 @@ public class UIManager : MonoBehaviour
         ComputerCountText.text = "Computer: " + com + " / " + totalComputerCount;
         PlayerCountText.text = "Player: " + play + " / " + totalPlayerCount;
     }
-    
 }
