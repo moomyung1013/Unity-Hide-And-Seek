@@ -42,5 +42,7 @@ MonoBehaviour:
   - UpdateUI
   - RPCDestroy
   - EndGame
+  - GameExit
+  - GameExitRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0

@@ -56,6 +56,4 @@ public class UIManager : MonoBehaviour
         ComputerCountText.text = "Computer: " + com + " / " + totalComputerCount;
         PlayerCountText.text = "Player: " + play + " / " + totalPlayerCount;
     }
-
-    public void UpdateCountdownText(Text countdownText, int count) => countdownText.text = count + "초 후 게임이 종료됩니다.";
 }
