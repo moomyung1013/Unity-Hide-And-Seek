@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 // 점수와 게임 오버 여부, 게임 UI를 관리하는 게임 매니저
 public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject gameOverPanel;
     public ParticleSystem deathEffect;
     private int ComputerCount = 10, PlayerCount = 2;
+    private GameObject countdownText, victoryUserText;
+    private float count = 3.0f;
 
     // 주기적으로 자동 실행되는, 동기화 메서드
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             // 네트워크를 통해 score 값을 보내기
             stream.SendNext(ComputerCount);
             stream.SendNext(PlayerCount);
+            stream.SendNext(count);
         }
         else
         {
@@ -45,6 +49,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             // 네트워크를 통해 score 값 받기
             ComputerCount = (int)stream.ReceiveNext();
             PlayerCount = (int)stream.ReceiveNext();
+            count = (float)stream.ReceiveNext();
             // 동기화하여 받은 점수를 UI로 표시
             UIManager.instance.UpdateScoreText(ComputerCount, PlayerCount);
         }
@@ -89,10 +94,28 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         UIManager.instance.UpdateScoreText(ComputerCount, PlayerCount);
     }
 
+    void CountDown()
+    {
+        for (count = 3.0f; count > 0; count -= Time.deltaTime)  UIManager.instance.UpdateCountdownText(countdownText.GetComponent<Text>(), (int)count);
+        photonView.RPC("GameExit", RpcTarget.All);
+    }
+
     [PunRPC]
     public void EndGame()
     {
         gameOverPanel.SetActive(true);
+        victoryUserText = GameObject.Find("Canvas").transform.Find("GameOverPanel").transform.Find("VictoryText").gameObject;
+        countdownText = GameObject.Find("Canvas").transform.Find("GameOverPanel").transform.Find("CountdownText").gameObject;
+        
+        victoryUserText.GetComponent<Text>().text = "Dalbok is win!";
+        CountDown();
     }
-    
+
+    [PunRPC]
+    public void GameExit()
+    {
+        Application.Quit();
+    }
+
+
 }
