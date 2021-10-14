@@ -28,8 +28,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject gameOverPanel;
     public ParticleSystem deathEffect;
     private int ComputerCount = 10, PlayerCount = 2;
-    private GameObject countdownText, victoryUserText;
-    private float count = 3.0f;
+    private GameObject countdownText, victoryUserText, networkManager;
     private Button exitBtn;
 
     // 주기적으로 자동 실행되는, 동기화 메서드
@@ -67,6 +66,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     
     private void Start()
     {
+        networkManager = GameObject.Find("NetworkManager");
         victoryUserText = GameObject.Find("Canvas").transform.Find("GameOverPanel").transform.Find("VictoryText").gameObject;
         exitBtn = GameObject.Find("Canvas").transform.Find("GameOverPanel").transform.Find("GameExitButton").gameObject.GetComponent<Button>();
         exitBtn.onClick.AddListener(GameExit);
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Dead(GameObject obj)
     {
-        AddScore(obj.tag);
+        AddScore(obj);
 
         Vector3 hitPoint = obj.transform.position;
         hitPoint.y += 1.5f;
@@ -84,12 +84,16 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         obj.SetActive(false);
     }
     // 점수를 추가하고 UI 갱신
-    public void AddScore(string who)
+    public void AddScore(GameObject who)
     {
-        if(who.Equals("Computer"))
+        if(who.tag.Equals("Computer"))
             ComputerCount -= 1;
-        else if(who.Equals("Player"))
+        else if(who.tag.Equals("Player"))
         {
+            string deadNickname = who.GetComponent<TestPlayerScript>().nickname;
+            string msg = "<color=red>" + deadNickname + "님이 아웃됐습니다.</color>";
+            networkManager.GetComponent<NetworkManager>().DeadSend(msg);
+
             PlayerCount -= 1;
             if (PlayerCount == 1)
                 photonView.RPC("EndGame", RpcTarget.All);

@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     public Text ComputerCountText, PlayerCountText;
     public int totalComputerCount, totalPlayerCount;
     private int ComputerCount, PlayerCount;
+    private GameObject networkManager;
 
     private void Awake()
     {
@@ -35,11 +36,12 @@ public class UIManager : MonoBehaviour
     }
     private void Start()
     {
+        networkManager = GameObject.Find("NetworkManager");
         ComputerCount = totalComputerCount;
-        PlayerCount = totalPlayerCount;
+        PlayerCount = networkManager.GetComponent<NetworkManager>().GetPlayerCount();
 
-        ComputerCountText.text = "Computer: " + ComputerCount.ToString() + " / " + totalComputerCount.ToString();
-        PlayerCountText.text = "Player: " + PlayerCount.ToString() + " / " + totalPlayerCount.ToString();
+        ComputerCountText.text = "Computer: " + ComputerCount + " / " + totalComputerCount;
+        PlayerCountText.text = "Player: " + PlayerCount+ " / " + networkManager.GetComponent<NetworkManager>().GetPlayerCount();
 
     }
     public void DecCount(GameObject obj)
@@ -52,8 +54,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScoreText(int com, int play)
     {
-
         ComputerCountText.text = "Computer: " + com + " / " + totalComputerCount;
-        PlayerCountText.text = "Player: " + play + " / " + totalPlayerCount;
+        PlayerCountText.text = "Player: " + play + " / " + networkManager.GetComponent<NetworkManager>().GetPlayerCount();
     }
 }

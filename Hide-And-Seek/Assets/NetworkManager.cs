@@ -12,6 +12,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject startPanel, chatPanel, chatView;
     public string gameVersion = "1.0";
     public PhotonView PV;
+    public int playerCount;
 
     private List<Transform> positionsList = new List<Transform>();
     private Text[] chatList;
@@ -83,11 +84,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         PV.RPC("ChatRPC", RpcTarget.All, "<color=yellow>" + newPlayer.NickName + "님이 참가하셨습니다</color>");
+        playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
     // 플레이어 퇴장 시 채팅 창 출력
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         PV.RPC("ChatRPC", RpcTarget.All, "<color=yellow>" + otherPlayer.NickName + "님이 나갔습니다</color>");
+        playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
 
     // 입장할 방이 없을 시, 방 생성
@@ -102,7 +105,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 4 });
     }
 
-    
+
+    public int GetPlayerCount()
+    {
+        playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
+        return playerCount;
+    }
+
     // 채팅 전송 함수
     public void Send()
     {

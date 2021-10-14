@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using Photon.Pun;
 using UnityStandardAssets.Utility;
-using UnityEngine.UI;
 
 public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 {
-
     public PhotonView PV;
     public ParticleSystem deathEffect;
     public Rigidbody rb;
@@ -18,7 +15,6 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     public Animator m_animator;
 
     private float m_currentV = 0; //현재 가상 수직선 위치
-    private float m_currentH = 0; //현재 가상 수평선 위치
     private readonly float m_interpolation = 10;
     private readonly float m_backwardRunScale = 0.9f;
     private Vector3 m_currentDirection = Vector3.zero;
@@ -31,7 +27,6 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     {
         manager = GameObject.Find("NetworkManager");
         ChatInput = GameObject.Find("Canvas").transform.Find("ChatPanel").transform.Find("ChatInputView").gameObject;
-        //if(ChatInput.activeSelf == true)
         ChatInput.SetActive(false);
         isChat = false;
         nickname = PhotonNetwork.NickName;
@@ -43,9 +38,8 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             Camera.main.GetComponent<SmoothFollow>().target = tr.Find("CamPivot").transform;
     }
   
-
     void Update()
-    {//메인 캐릭터 업데이트
+    { //메인 캐릭터 업데이트
 
         if (!PV.IsMine && PhotonNetwork.IsConnected)
             return;
@@ -64,10 +58,7 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
         
-        if (v < 0)
-        { //s일때 뒤로 걷는 속도 적용
-            v *= m_backwardRunScale;
-        }
+        if (v < 0)  v *= m_backwardRunScale;
 
         m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation); //상하 갱신
 
@@ -75,41 +66,10 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         tr.Rotate(Vector3.up * h * m_turnSpeed * Time.deltaTime);
         m_animator.SetFloat("Speed", m_currentV); //애니메이션 갱신
     }
-
-    public void Dead(GameObject player, string attackNickname)
-    {
-        string deadNickname = player.GetComponent<TestPlayerScript>().nickname;
-        string msg = "<color=red>" + attackNickname + "님이 " + deadNickname + "님을 아웃시켰습니다.</color>";
-        manager.GetComponent<NetworkManager>().DeadSend(msg);
-        
-        //PV.RPC("RPCDestroy", RpcTarget.AllBuffered);
-    }
-
+    
     [PunRPC]
     public void RPCDestroy() => Destroy(gameObject);
-
-    [PunRPC]
-    void TankUpdate(float v, float h, float y_rot)
-    {
-        if (v < 0)
-        { //s일때 뒤로 걷는 속도 적용
-            v *= m_backwardRunScale;
-        }
-
-        m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation); //상하 갱신
-        m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation); //좌우 갱신
-
-        transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime; //상하 이동
-        transform.position += transform.right * m_currentH * m_moveSpeed * Time.deltaTime; //좌우 이동
-        transform.Rotate(0, y_rot * m_turnSpeed * Time.deltaTime, 0); //로테이션
-        m_animator.SetFloat("Speed", m_currentV); //애니메이션 갱신
-
-
-        //tr.Translate(Vector3.forward * v * m_moveSpeed * Time.deltaTime);
-        //tr.Rotate(Vector3.up * h * m_turnSpeed * Time.deltaTime);
-        //m_animator.SetFloat("Direction", m_currentH); //애니메이션 갱신
-    }
-
+    
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
     }
