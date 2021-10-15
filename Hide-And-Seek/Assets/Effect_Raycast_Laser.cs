@@ -13,7 +13,6 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
     
     void Update()
     {
-
         if (!photonView.IsMine) return;
 
         if (Input.GetMouseButtonDown(0))
@@ -21,9 +20,6 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
             photonView.RPC("Laser", RpcTarget.Others, null);
             Laser();
         }
-        //ScaleDistance.transform.localScale = new Vector3(1, 1, 1);
-        //RayResult.transform.position = hit.point;
-        //RayResult.transform.rotation = Quaternion.LookRotation(hit.normal);
     }
 
     [PunRPC]
@@ -34,10 +30,8 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
         {
             if (!PV.IsMine && hit.transform.tag == "Player" && hit.transform.GetComponent<PhotonView>().IsMine)
             {
-                string attckNickname = PhotonNetwork.NickName;
                 GameObject player = hit.transform.gameObject;
                 GameManager.instance.Dead(player);
-
             }
             else if (hit.transform.tag == "Computer")
             {

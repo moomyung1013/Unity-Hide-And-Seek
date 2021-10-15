@@ -9,14 +9,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Text StatusText;
     public InputField NickNameInput, ChatInput;
     public Button startButton;
-    public GameObject startPanel, chatPanel, chatView;
+    public GameObject startPanel, chatPanel, chatView, gameOverPanel;
     public string gameVersion = "1.0";
     public PhotonView PV;
-    public int playerCount;
 
+    public List<string> nicknameList = new List<string>();
     private List<Transform> positionsList = new List<Transform>();
     private Text[] chatList;
+    private Text victoryUserText;
     private int idx;
+    private Button exitBtn;
 
     void Awake()
     {
@@ -26,10 +28,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         Transform[] positions = GameObject.Find("SpawnPosition").GetComponentsInChildren<Transform>();
-        chatList = chatView.GetComponentsInChildren<Text>();
         foreach (Transform pos in positions)
             positionsList.Add(pos);
-        
+
+        chatList = chatView.GetComponentsInChildren<Text>();
+        victoryUserText = gameOverPanel.GetComponent<Text>();
+        exitBtn = GameObject.Find("Canvas").transform.Find("GameOverPanel").transform.Find("GameExitButton").gameObject.GetComponent<Button>();
+
+        exitBtn.onClick.AddListener(GameExit);
         startButton.onClick.AddListener(JoinRoom);
 
         OnLogin();
@@ -72,8 +78,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsMasterClient)
         {
+            nicknameList.Add(PhotonNetwork.NickName);
             PV.RPC("ChatRPC", RpcTarget.All, "<color=yellow>[방장] " + PhotonNetwork.NickName + "님이 참가하셨습니다</color>");
             PV.RPC("CreateComputerPlayer", RpcTarget.All);
+            exitBtn.interactable = true;
+        }
+        else
+        {
+            exitBtn.interactable = false;
         }
         idx = Random.Range(1, positionsList.Count);
         PhotonNetwork.Instantiate("Player3", positionsList[idx].position, Quaternion.identity);
@@ -83,14 +95,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // 플레이어 접속 시 채팅 창 출력
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
+        nicknameList.Add(newPlayer.NickName);
         PV.RPC("ChatRPC", RpcTarget.All, "<color=yellow>" + newPlayer.NickName + "님이 참가하셨습니다</color>");
-        playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
     // 플레이어 퇴장 시 채팅 창 출력
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
+        nicknameList.Remove(otherPlayer.NickName);
         PV.RPC("ChatRPC", RpcTarget.All, "<color=yellow>" + otherPlayer.NickName + "님이 나갔습니다</color>");
-        playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
 
     // 입장할 방이 없을 시, 방 생성
@@ -106,10 +118,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
 
+    void GameExit() => photonView.RPC("GameExitRPC", RpcTarget.All);
+
     public int GetPlayerCount()
     {
-        playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
-        return playerCount;
+        return PhotonNetwork.CurrentRoom.PlayerCount;
     }
 
     // 채팅 전송 함수
@@ -151,5 +164,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             positionsList.RemoveAt(idx);
         }
     }
-    
+
+    [PunRPC]
+    public void EndGame()
+    {
+        gameOverPanel.SetActive(true);
+    }
+
+    [PunRPC]
+    public void GameExitRPC()
+    {
+        Application.Quit();
+    }
 }

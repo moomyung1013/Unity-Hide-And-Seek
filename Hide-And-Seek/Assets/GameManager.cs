@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     private static GameManager m_instance; // 싱글톤이 할당될 static 변수
-    public bool isGameover { get; private set; } // 게임 오버 상태
+
     public GameObject gameOverPanel;
     public ParticleSystem deathEffect;
     private int ComputerCount = 10, PlayerCount = 2;
@@ -52,8 +52,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             UIManager.instance.UpdateScoreText(ComputerCount, PlayerCount);
         }
     }
-
-
+    
     private void Awake()
     {
         // 씬에 싱글톤 오브젝트가 된 다른 GameManager 오브젝트가 있다면
@@ -83,6 +82,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitPoint)), deathEffect.main.startLifetimeMultiplier);
         obj.SetActive(false);
     }
+
     // 점수를 추가하고 UI 갱신
     public void AddScore(GameObject who)
     {
@@ -92,33 +92,17 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             string deadNickname = who.GetComponent<TestPlayerScript>().nickname;
             string msg = "<color=red>" + deadNickname + "님이 아웃됐습니다.</color>";
+
+            networkManager.GetComponent<NetworkManager>().nicknameList.Remove(deadNickname);
             networkManager.GetComponent<NetworkManager>().DeadSend(msg);
 
             PlayerCount -= 1;
             if (PlayerCount == 1)
-                photonView.RPC("EndGame", RpcTarget.All);
+            {
+                networkManager.GetComponent<NetworkManager>().PV.RPC("EndGame", RpcTarget.All);
+            }
         }
         // 점수 UI 텍스트 갱신
         UIManager.instance.UpdateScoreText(ComputerCount, PlayerCount);
     }
-    
-    [PunRPC]
-    public void EndGame()
-    {
-        gameOverPanel.SetActive(true);
-        victoryUserText.GetComponent<Text>().text = "Dalbok is win!";
-        
-        if (PhotonNetwork.IsMasterClient)
-            exitBtn.interactable = true;
-        else
-            exitBtn.interactable = false;
-    }
-
-    [PunRPC]
-    public void GameExitRPC()
-    {
-        Application.Quit();
-    }
-
-
 }

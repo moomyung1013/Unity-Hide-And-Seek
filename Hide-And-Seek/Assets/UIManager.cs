@@ -21,9 +21,6 @@ public class UIManager : MonoBehaviour
 
     private static UIManager m_instance; // 싱글톤이 할당될 변수
     
-    public Text scoreText; // 점수 표시용 텍스트
-    public GameObject gameoverUI; // 게임 오버시 활성화할 UI 
-
     public Text ComputerCountText, PlayerCountText;
     public int totalComputerCount, totalPlayerCount;
     private int ComputerCount, PlayerCount;
@@ -37,11 +34,12 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         networkManager = GameObject.Find("NetworkManager");
+        totalPlayerCount = 2;
         ComputerCount = totalComputerCount;
-        PlayerCount = networkManager.GetComponent<NetworkManager>().GetPlayerCount();
+        PlayerCount = totalPlayerCount;
 
         ComputerCountText.text = "Computer: " + ComputerCount + " / " + totalComputerCount;
-        PlayerCountText.text = "Player: " + PlayerCount+ " / " + networkManager.GetComponent<NetworkManager>().GetPlayerCount();
+        PlayerCountText.text = "Player: " + PlayerCount+ " / " + totalPlayerCount;
 
     }
     public void DecCount(GameObject obj)

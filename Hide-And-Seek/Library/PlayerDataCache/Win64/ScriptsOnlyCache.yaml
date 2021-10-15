@@ -5,7 +5,6 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - ComputerScript
     - Effect_Raycast_Laser
-    - GameDirector
     - GameManager
     - LaserScript
     - NetworkManager
@@ -21,6 +20,8 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
+    PhotonUnityNetworking.Editor.dll:
+    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbodyView
@@ -161,17 +162,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13422}
     - Class: 114
-      Script: {instanceID: 13666}
+      Script: {instanceID: 13796}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13852}
     - Class: 114
-      Script: {instanceID: 13854}
+      Script: {instanceID: 13962}
     - Class: 114
-      Script: {instanceID: 13964}
+      Script: {instanceID: 13996}
     - Class: 114
-      Script: {instanceID: 13998}
+      Script: {instanceID: 14004}
     - Class: 114
-      Script: {instanceID: 14006}
+      Script: {instanceID: 23102}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -291,7 +292,7 @@ ScriptsOnlyBuild:
     className: ServerAddressProperty
   - hash:
       serializedVersion: 2
-      Hash: ac01ab8efb0e2126042a2ed47a66312a
+      Hash: 2dd4880ff20280d5c22644d627b59aca
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: NetworkManager
@@ -1179,7 +1180,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 6d0f3d097f5ba80ff2db8a4b828427a2
+      Hash: c075de12a6c73f70deefd1c78a53258d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TestPlayerScript
@@ -1423,12 +1424,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_StyleSheet
-  - hash:
-      serializedVersion: 2
-      Hash: cc5e164fe041e746ea27952820253c97
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GameDirector
   - hash:
       serializedVersion: 2
       Hash: e6ae40841db498b6e673877ac45ad208

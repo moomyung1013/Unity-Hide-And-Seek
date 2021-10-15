@@ -20,7 +20,6 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     private Vector3 m_currentDirection = Vector3.zero;
 
     private GameObject manager, ChatInput;
-    public bool isChat;
     public string nickname;
 
     private void Start()
@@ -28,7 +27,6 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         manager = GameObject.Find("NetworkManager");
         ChatInput = GameObject.Find("Canvas").transform.Find("ChatPanel").transform.Find("ChatInputView").gameObject;
         ChatInput.SetActive(false);
-        isChat = false;
         nickname = PhotonNetwork.NickName;
 
         rb = GetComponent<Rigidbody>();
