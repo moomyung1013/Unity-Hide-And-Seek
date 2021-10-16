@@ -43,7 +43,6 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
         ScaleDistance.SetActive(true);
         ScaleDistance.transform.localScale = new Vector3(1, 1, 30);
         Invoke("test", 1.0f);
-        //Instantiate(laser, laserPos.position, laserPos.rotation);
     }
     void test()
     {

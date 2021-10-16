@@ -96,12 +96,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         nicknameList.Add(newPlayer.NickName);
+        GameManager.instance.SetCount(PhotonNetwork.CurrentRoom.PlayerCount, true);
         PV.RPC("ChatRPC", RpcTarget.All, "<color=yellow>" + newPlayer.NickName + "님이 참가하셨습니다</color>");
     }
     // 플레이어 퇴장 시 채팅 창 출력
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         nicknameList.Remove(otherPlayer.NickName);
+        GameManager.instance.SetCount(PhotonNetwork.CurrentRoom.PlayerCount, false);
         PV.RPC("ChatRPC", RpcTarget.All, "<color=yellow>" + otherPlayer.NickName + "님이 나갔습니다</color>");
     }
 

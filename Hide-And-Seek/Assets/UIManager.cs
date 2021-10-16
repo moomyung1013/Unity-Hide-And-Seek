@@ -22,9 +22,6 @@ public class UIManager : MonoBehaviour
     private static UIManager m_instance; // 싱글톤이 할당될 변수
     
     public Text ComputerCountText, PlayerCountText;
-    public int totalComputerCount, totalPlayerCount;
-    private int ComputerCount, PlayerCount;
-    private GameObject networkManager;
 
     private void Awake()
     {
@@ -33,26 +30,11 @@ public class UIManager : MonoBehaviour
     }
     private void Start()
     {
-        networkManager = GameObject.Find("NetworkManager");
-        totalPlayerCount = 2;
-        ComputerCount = totalComputerCount;
-        PlayerCount = totalPlayerCount;
-
-        ComputerCountText.text = "Computer: " + ComputerCount + " / " + totalComputerCount;
-        PlayerCountText.text = "Player: " + PlayerCount+ " / " + totalPlayerCount;
-
-    }
-    public void DecCount(GameObject obj)
-    {
-        if (obj.tag == "Player")
-            PlayerCount -= 1;
-        else
-            ComputerCount -= 1;
     }
 
-    public void UpdateScoreText(int com, int play)
+    public void UpdateScoreText(int com, int play, int tcom, int tplay)
     {
-        ComputerCountText.text = "Computer: " + com + " / " + totalComputerCount;
-        PlayerCountText.text = "Player: " + play + " / " + networkManager.GetComponent<NetworkManager>().GetPlayerCount();
+        ComputerCountText.text = "Computer: " + com + " / " + tcom;
+        PlayerCountText.text = "Player: " + play + " / " + tplay;
     }
 }

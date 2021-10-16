@@ -171,8 +171,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13996}
     - Class: 114
       Script: {instanceID: 14004}
-    - Class: 114
-      Script: {instanceID: 23102}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -292,7 +290,7 @@ ScriptsOnlyBuild:
     className: ServerAddressProperty
   - hash:
       serializedVersion: 2
-      Hash: 2dd4880ff20280d5c22644d627b59aca
+      Hash: d0055817ce1e78df9f39fac1740d1039
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: NetworkManager
@@ -382,7 +380,7 @@ ScriptsOnlyBuild:
     className: TextToggleIsOnTransition
   - hash:
       serializedVersion: 2
-      Hash: c7ffcc8712d7a6407cf73090ef41bcd4
+      Hash: f3fcd591059a6a72f06ec76bf27ecfd6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UIManager

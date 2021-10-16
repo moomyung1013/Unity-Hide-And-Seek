@@ -27,32 +27,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public GameObject gameOverPanel;
     public ParticleSystem deathEffect;
-    private int ComputerCount = 10, PlayerCount = 2;
     private GameObject countdownText, victoryUserText, networkManager;
     private Button exitBtn;
 
-    // 주기적으로 자동 실행되는, 동기화 메서드
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        // 로컬 오브젝트라면 쓰기 부분이 실행됨
-        if (stream.IsWriting)
-        {
-            // 네트워크를 통해 score 값을 보내기
-            stream.SendNext(ComputerCount);
-            stream.SendNext(PlayerCount);
-        }
-        else
-        {
-            // 리모트 오브젝트라면 읽기 부분이 실행됨         
-
-            // 네트워크를 통해 score 값 받기
-            ComputerCount = (int)stream.ReceiveNext();
-            PlayerCount = (int)stream.ReceiveNext();
-            // 동기화하여 받은 점수를 UI로 표시
-            UIManager.instance.UpdateScoreText(ComputerCount, PlayerCount);
-        }
-    }
-    
     private void Awake()
     {
         // 씬에 싱글톤 오브젝트가 된 다른 GameManager 오브젝트가 있다면
@@ -69,6 +46,11 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         victoryUserText = GameObject.Find("Canvas").transform.Find("GameOverPanel").transform.Find("VictoryText").gameObject;
         exitBtn = GameObject.Find("Canvas").transform.Find("GameOverPanel").transform.Find("GameExitButton").gameObject.GetComponent<Button>();
         exitBtn.onClick.AddListener(GameExit);
+
+        totalComputerCount = 10;
+        totalPlayerCount = 1;
+        PlayerCount = totalPlayerCount;
+        ComputerCount = totalComputerCount;
     }
 
     void GameExit() => photonView.RPC("GameExitRPC", RpcTarget.All);
@@ -103,6 +85,41 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
         // 점수 UI 텍스트 갱신
-        UIManager.instance.UpdateScoreText(ComputerCount, PlayerCount);
+        UIManager.instance.UpdateScoreText(ComputerCount, PlayerCount, totalComputerCount, totalPlayerCount);
+    }
+
+    public void SetCount(int totalPlayer, bool isEnter)
+    {
+        if (isEnter)
+            PlayerCount += 1;
+        else
+            PlayerCount -= 1;
+        totalPlayerCount = totalPlayer;
+        UIManager.instance.UpdateScoreText(ComputerCount, PlayerCount, totalComputerCount, totalPlayerCount);
+    }
+
+    private int ComputerCount, PlayerCount, totalComputerCount, totalPlayerCount;
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        // 로컬 오브젝트라면 쓰기 부분이 실행됨
+        if (stream.IsWriting)
+        {
+            // 네트워크를 통해 score 값을 보내기
+            stream.SendNext(ComputerCount);
+            stream.SendNext(PlayerCount);
+            stream.SendNext(totalComputerCount);
+            stream.SendNext(totalPlayerCount);
+        }
+        else
+        {
+            // 리모트 오브젝트라면 읽기 부분이 실행됨
+            // 네트워크를 통해 score 값 받기
+            ComputerCount = (int)stream.ReceiveNext();
+            PlayerCount = (int)stream.ReceiveNext();
+            totalComputerCount = (int)stream.ReceiveNext();
+            totalPlayerCount = (int)stream.ReceiveNext();
+            // 동기화하여 받은 점수를 UI로 표시
+            UIManager.instance.UpdateScoreText(ComputerCount, PlayerCount, totalComputerCount, totalPlayerCount);
+        }
     }
 }

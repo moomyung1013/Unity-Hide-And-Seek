@@ -1584,7 +1584,6 @@ MonoBehaviour:
   gameOverPanel: {fileID: 49698444}
   gameVersion: 1.0
   PV: {fileID: 618619526}
-  playerCount: 0
   nicknameList: []
 --- !u!4 &618619525
 Transform:
@@ -3210,7 +3209,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.5889407, b: 0, a: 1}
+  m_Color: {r: 0.5188679, g: 0.30521643, b: 0, a: 1}
   m_Intensity: 0.4
   m_Range: 10
   m_SpotAngle: 30
@@ -4588,12 +4587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65c957154946c14aa2c6f03e0b36324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
-  gameoverUI: {fileID: 0}
   ComputerCountText: {fileID: 1732198112}
   PlayerCountText: {fileID: 1711956031}
-  totalComputerCount: 10
-  totalPlayerCount: 4
 --- !u!4 &1708087649
 Transform:
   m_ObjectHideFlags: 0
