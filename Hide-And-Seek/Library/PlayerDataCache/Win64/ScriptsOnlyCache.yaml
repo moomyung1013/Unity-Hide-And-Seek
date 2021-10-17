@@ -59,8 +59,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     - UnityEngine.UI.VerticalLayoutGroup
-    com.unity.multiplayer-hlapi.Runtime.dll:
-    - UnityEngine.Networking.NetworkCallbacks
   sceneClasses:
     Assets/Scenes/TestScene.unity:
     - Class: 1
@@ -88,6 +86,8 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
@@ -1178,7 +1178,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: c075de12a6c73f70deefd1c78a53258d
+      Hash: 0b9e1aca33a6e40155de3b2e86466f88
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TestPlayerScript
@@ -1490,7 +1490,7 @@ ScriptsOnlyBuild:
     className: Line
   - hash:
       serializedVersion: 2
-      Hash: 0b8930c64f92e57ee72418987996eb24
+      Hash: 9826a09e84b2b05c2ad51718e2712110
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Effect_Raycast_Laser

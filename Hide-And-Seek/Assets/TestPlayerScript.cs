@@ -4,10 +4,12 @@ using UnityStandardAssets.Utility;
 
 public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 {
+    public string nickname;
     public PhotonView PV;
     public ParticleSystem deathEffect;
     public Rigidbody rb;
     private Transform tr;
+    private GameObject manager, ChatInput;
 
     public float m_moveSpeed = 1;
     public float m_turnSpeed = 200;
@@ -19,8 +21,6 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     private readonly float m_backwardRunScale = 0.9f;
     private Vector3 m_currentDirection = Vector3.zero;
 
-    private GameObject manager, ChatInput;
-    public string nickname;
 
     private void Start()
     {
@@ -62,6 +62,7 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             tr.Translate(Vector3.forward * v * m_moveSpeed * Time.deltaTime);
             tr.Rotate(Vector3.up * h * m_turnSpeed * Time.deltaTime);
             m_animator.SetFloat("Speed", m_currentV); //애니메이션 갱신
+            
         }
         else
         {

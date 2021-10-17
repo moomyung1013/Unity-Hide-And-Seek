@@ -10,7 +10,15 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
     public GameObject ScaleDistance;
     public GameObject RayResult; // 충돌 위치 출력 결과
     public PhotonView PV;
-    
+    public AudioClip LaserSound;
+
+    private AudioSource _audio;
+
+    private void Start()
+    {
+        _audio = this.gameObject.AddComponent<AudioSource>();
+    }
+
     void Update()
     {
         if (!photonView.IsMine) return;
@@ -25,6 +33,7 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
     [PunRPC]
     void Laser()
     {
+        _audio.PlayOneShot(LaserSound, 0.8f);
         RaycastHit hit;
         if (Physics.Raycast(Raybody.transform.position, ScaleDistance.transform.forward, out hit, 1.0f))
         {

@@ -242,7 +242,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4785184780657093023}
-  - {fileID: 5724853353221485785}
+  - {fileID: 7822211102541697801}
   m_Father: {fileID: 4785184780657092695}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1546,6 +1546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d0e66a552f5164e963e24cd497473a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nickname: 
   PV: {fileID: 565294325883597069}
   deathEffect: {fileID: 6870543689452607470, guid: 9a45221fb4a0c0349a2a167a3f56dedc,
     type: 3}
@@ -1554,7 +1555,6 @@ MonoBehaviour:
   m_turnSpeed: 70
   m_jumpForce: 4
   m_animator: {fileID: 4785184780649825847}
-  nickname: 
 --- !u!114 &565294325883597069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2574,7 +2574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ea3dbf2753856143a4f8ef6495d3013, type: 3}
---- !u!4 &5724853353221485785 stripped
+--- !u!4 &7822211102541697801 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2593176487761094128, guid: 3ea3dbf2753856143a4f8ef6495d3013,
     type: 3}
