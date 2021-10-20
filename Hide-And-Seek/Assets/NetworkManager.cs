@@ -9,7 +9,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Text StatusText;
     public InputField NickNameInput, ChatInput;
     public Button startButton;
-    public GameObject startPanel, chatPanel, chatView, gameOverPanel;
+    public GameObject startPanel, chatPanel, chatView, gameOverPanel, lobbyPanel;
     public string gameVersion = "1.0";
     public PhotonView PV;
 
