@@ -13,16 +13,18 @@ public class Effect_Raycast_Laser : MonoBehaviourPunCallbacks
     public AudioClip LaserSound;
 
     private AudioSource _audio;
+    private NetworkManager manager;
 
     private void Start()
     {
         _audio = this.gameObject.AddComponent<AudioSource>();
+        manager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
     }
 
     void Update()
     {
         if (!photonView.IsMine) return;
-
+        if (!manager.isGameStart) return;
         if (Input.GetMouseButtonDown(0))
         {
             photonView.RPC("Laser", RpcTarget.Others, null);

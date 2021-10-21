@@ -20,6 +20,8 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
+    PhotonUnityNetworking.Editor.dll:
+    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbodyView
@@ -51,6 +53,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
     - UnityEngine.UI.InputField
     - UnityEngine.UI.Shadow
@@ -153,6 +156,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12986}
     - Class: 114
       Script: {instanceID: 12998}
+    - Class: 114
+      Script: {instanceID: 13036}
     - Class: 114
       Script: {instanceID: 13070}
     - Class: 114
@@ -292,7 +297,7 @@ ScriptsOnlyBuild:
     className: ServerAddressProperty
   - hash:
       serializedVersion: 2
-      Hash: 8c08048e8bd6f5b2731c22ac11cd262c
+      Hash: 34da489db175fca676797ca02e86c436
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: NetworkManager

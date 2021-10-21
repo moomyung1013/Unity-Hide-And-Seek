@@ -9,7 +9,8 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     public ParticleSystem deathEffect;
     public Rigidbody rb;
     private Transform tr;
-    private GameObject manager, ChatInput;
+    private GameObject ChatInput;
+    private NetworkManager manager;
 
     public float m_moveSpeed = 1;
     public float m_turnSpeed = 200;
@@ -24,7 +25,7 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Start()
     {
-        manager = GameObject.Find("NetworkManager");
+        manager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
         ChatInput = GameObject.Find("Canvas").transform.Find("ChatPanel").transform.Find("ChatInputView").gameObject;
         ChatInput.SetActive(false);
         nickname = PV.Owner.NickName;
@@ -39,7 +40,7 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     void Update()
     { //메인 캐릭터 업데이트
 
-        if (PV.IsMine)
+        if (PV.IsMine && manager.isGameStart)
         {
             v = Input.GetAxis("Vertical"); // 상하 이동 W키 : 0~1, S키: -1~0
             h = Input.GetAxis("Horizontal"); // 좌우 이동 D키: 0~1, A키: -1~0
@@ -50,7 +51,7 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
                     ChatInput.SetActive(true);
                 else
                 {
-                    manager.GetComponent<NetworkManager>().Send();
+                    manager.Send();
                     ChatInput.SetActive(false);
                 }
             }
