@@ -44,5 +44,6 @@ MonoBehaviour:
   - EndGame
   - GameExit
   - GameExitRPC
+  - PlayerConnect
   DisableAutoOpenWizard: 1
   ShowSettings: 0
