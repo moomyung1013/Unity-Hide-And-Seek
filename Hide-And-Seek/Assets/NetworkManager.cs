@@ -6,13 +6,25 @@ using System.Collections.Generic;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    public Text StatusText;
-    public InputField NickNameInput, ChatInput;
-    public Button startButton;
-    public GameObject startPanel, chatPanel, chatView, gameOverPanel, lobbyPanel;
+    [Header("Photon")]
     public string gameVersion = "1.0";
     public PhotonView PV;
 
+    [Header("Start Panel")]
+    public Text StatusText;
+    public InputField NickNameInput;
+    public Button startButton;
+    public GameObject startPanel;
+
+    [Header("Lobby Panel")]
+    public GameObject lobbyPanel, lobbyChatView, playerListView;
+    public InputField lobbyChatInput;
+    public Text currentPlayerCountText, roomMasterText;
+    public Button gameStartButton, backButton;
+
+    [Header("InGame Panel")]
+    public InputField ChatInput;
+    public GameObject chatPanel, chatView, gameOverPanel;
     public List<string> nicknameList = new List<string>();
     private List<Transform> positionsList = new List<Transform>();
     private Text[] chatList;
@@ -70,7 +82,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         startPanel.SetActive(false);
-        chatPanel.SetActive(true);
+        lobbyPanel.SetActive(true);
+        //chatPanel.SetActive(true);
 
         ChatInput.text = "";
         foreach (Text chat in chatList)
