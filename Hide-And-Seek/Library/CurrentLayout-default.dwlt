@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -46,7 +46,7 @@ MonoBehaviour:
     y: 0
     width: 1536
     height: 791
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -112,8 +112,8 @@ MonoBehaviour:
     y: 30
     width: 1536
     height: 741
-  m_MinSize: {x: 679, y: 492}
-  m_MaxSize: {x: 14002, y: 14042}
+  m_MinSize: {x: 679, y: 342}
+  m_MaxSize: {x: 12004, y: 8042}
   vertical: 0
   controlID: 60
 --- !u!114 &6
@@ -137,8 +137,8 @@ MonoBehaviour:
     y: 0
     width: 1195
     height: 741
-  m_MinSize: {x: 403, y: 492}
-  m_MaxSize: {x: 10001, y: 14042}
+  m_MinSize: {x: 403, y: 342}
+  m_MaxSize: {x: 8003, y: 8042}
   vertical: 1
   controlID: 65
 --- !u!114 &7
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -239,14 +239,14 @@ MonoBehaviour:
     y: 464
     width: 1195
     height: 277
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 16}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -393,9 +393,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 44070300
-      m_LastClickedID: 198468
-      m_ExpandedIDs: 569dfdff729dfdff5a9ffdfff6cafdff12cbfdfffaccfdff72f8fdff8ef8fdffa0f8fdff0efafdff2afafdff3cfafdff8afbfdffa6fbfdffb8fbfdff26fdfdff42fdfdff54fdfdffd0fefdffecfefdfffefefdff7a03feff9603feffa803feff9e06feffba06feffcc06feff1209feff2e09feff4009feff320dfeff4e0dfeff400ffeffe21cfefffe1cfeff101dfeff5a1ffeff761ffeff881ffeffea21feff0622feff1822feffd824fefff424feff0625feff5a26feff7626feff8826feff0228feff1e28feff082afeff9a38feffb638feffc838feff263cfeff423cfeff543cfeff183efeff343efeff463efeff1440feff3040feff1a42feff224dfeff3e4dfeff284ffeffc859feff085bfeff005cfeff8296feff9e96feff8c98feff40d7feff5cd7feff50d9feff3613ffff5213ffff3c15ffff603fffff7c3fffff7041ffff1243ffff2e43ffff2245ffffca46ffffe646ffffda48ffff124dffff2e4dffff224fffffc450ffffe050ffffd452ffff1659ffff3259ffff265bffff085fffff245fffff365fffff6c60ffff8860ffff7c62ffff8669ffffa269ffff966bffff8e6fffffaa6fffff9e71ffff1475ffff3075ffff2477fffffe7affff1a7bffff0e7dfffff280ffff0e81ffff0283ffff26cdffff0edeffffece4ffff2ee5ffffb4f0ffff6efbffffbe390000ce390000123a0000def70000e6f80000eef80000fc040100040601000c060100cc490100dc4a0100fa9b01003e9c01004e9d010040c7010062c80100b4dd0100d6de01001ceb0100f2eb01003eec010084f801004cf901005af901009cf90100a6f90100f8fa01009c0202006403020072030200be030200100502001a1902003c1a0200de290200002b0200fa330200d03402001c3502006e36020024410200404202008c420200de430200345202000a530200565302007460020082600200ce600200cc61020020620200e0770200247802002e78020080790200e88a0200b08b0200fe8b0200508d020028980200f09802003e990200909a0200b0a8020078a90200c6a90200c4aa020018ab020008b70200fc04030078060300
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 0026ffff1c26ffff2e26ffffd827fffff427ffff0628ffff3829ffff5429ffff6629fffff42affff102bffff222bffff102effffb640ffff404fffff8650ffffa250ffff8a52ffff36b1ffff52b1ffff44b3ffff16b6ffff32b6ffff1ab8ffff2addffff46ddffff38dfffffdce0fffff8e0ffffe2e2ffff40edffff5cedffff4aefffff6efbffff7e6e00008a8a0000e88a0000368b0000e88b0000e29a0000309b0000849c000052d10000ccdf000078e1000098fc000044fe0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -774,20 +774,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\moomy\Desktop\GitHub\Unity_Hide_And_Seek\Hide-And-Seek
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 7e3f0000
-    m_LastClickedID: 16254
-    m_ExpandedIDs: 00000000723e0000743e0000763e0000783e00007a3e00007c3e00007e3e0000803e0000823e0000843e0000863e0000883e00008a3e00008c3e00008e3e0000903e0000923e0000943e0000963e0000983e00009a3e00009c3e00009e3e0000a03e0000a23e0000a43e0000a63e0000a83e0000aa3e0000ac3e0000ae3e0000b03e0000b23e000000ca9a3b
+    m_SelectedIDs: a63f0000
+    m_LastClickedID: 16294
+    m_ExpandedIDs: 00000000a63f0000a83f0000aa3f0000ac3f0000ae3f0000b03f0000b23f0000b43f0000b63f0000b83f0000ba3f0000bc3f0000be3f0000c03f0000c23f0000c43f0000c63f0000c83f0000ca3f0000cc3f0000ce3f0000d03f0000d23f0000d43f0000d63f0000d83f0000da3f0000dc3f0000de3f0000e03f0000e23f0000e43f0000e63f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -815,7 +815,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000723e0000743e0000763e0000783e00007a3e00007c3e00007e3e0000803e0000823e0000843e0000863e0000883e00008a3e00008c3e00008e3e0000903e0000923e0000943e0000963e0000983e00009a3e00009c3e00009e3e0000a03e0000a23e0000a43e0000a63e0000a83e0000aa3e0000ac3e0000ae3e0000b03e0000b23e0000
+    m_ExpandedIDs: 00000000a63f0000a83f0000aa3f0000ac3f0000ae3f0000b03f0000b23f0000b43f0000b63f0000b83f0000ba3f0000bc3f0000be3f0000c03f0000c23f0000c43f0000c63f0000c83f0000ca3f0000cc3f0000ce3f0000d03f0000d23f0000d43f0000d63f0000d83f0000da3f0000dc3f0000de3f0000e03f0000e23f0000e43f0000e63f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -840,8 +840,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 342c0000
+    m_LastClickedInstanceID: 11316
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300009c800000d83f0000fa3f0000f43f0000c03a0000a2410000ce420000a04100000a4100009040000098410000c0420000d8460000204500002c44000000000000
     m_RenameOverlay:
@@ -986,29 +986,4 @@ MonoBehaviour:
     y: 82.6
     width: 329
     height: 720
-  m_ViewDataDictionary: {fileID: 0}
---- !u!114 &21
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12059, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEditor:UnityEditor.Experimental.TerrainAPI:PaintTextureTool
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Failed to load
-    m_Image: {fileID: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 320
-    height: 550
   m_ViewDataDictionary: {fileID: 0}
