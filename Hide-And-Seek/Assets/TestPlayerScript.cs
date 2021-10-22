@@ -40,12 +40,12 @@ public class TestPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     void Update()
     { //메인 캐릭터 업데이트
 
-        if (PV.IsMine && manager.isGameStart)
+        if (PV.IsMine)
         {
             v = Input.GetAxis("Vertical"); // 상하 이동 W키 : 0~1, S키: -1~0
             h = Input.GetAxis("Horizontal"); // 좌우 이동 D키: 0~1, A키: -1~0
 
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return) && manager.isGameStart)
             {
                 if (ChatInput.activeSelf == false)
                     ChatInput.SetActive(true);

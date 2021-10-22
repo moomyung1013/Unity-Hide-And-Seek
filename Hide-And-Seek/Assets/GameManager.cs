@@ -44,16 +44,12 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         networkManager = GameObject.Find("NetworkManager");
         victoryUserText = GameObject.Find("Canvas").transform.Find("GameOverPanel").transform.Find("VictoryText").gameObject;
-        exitBtn = GameObject.Find("Canvas").transform.Find("GameOverPanel").transform.Find("GameExitButton").gameObject.GetComponent<Button>();
-        exitBtn.onClick.AddListener(GameExit);
 
         totalComputerCount = 10;
         totalPlayerCount = 1;
         PlayerCount = totalPlayerCount;
         ComputerCount = totalComputerCount;
     }
-
-    void GameExit() => photonView.RPC("GameExitRPC", RpcTarget.All);
 
     public void Dead(GameObject obj)
     {
@@ -81,7 +77,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             PlayerCount -= 1;
             if (PlayerCount == 1)
             {
-                networkManager.GetComponent<NetworkManager>().PV.RPC("EndGame", RpcTarget.All);
+                networkManager.GetComponent<NetworkManager>().PV.RPC("EndGame", RpcTarget.AllViaServer);
             }
         }
         // 점수 UI 텍스트 갱신

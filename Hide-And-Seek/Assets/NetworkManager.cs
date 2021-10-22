@@ -91,6 +91,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        idx = Random.Range(1, positionsList.Count);
+        PhotonNetwork.Instantiate("Player3", positionsList[idx].position, Quaternion.identity);
+        positionsList.RemoveAt(idx);
+
         startPanel.SetActive(false);
         lobbyPanel.SetActive(true);
 
@@ -112,9 +116,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             exitBtn.interactable = false;
         }
 
-        idx = Random.Range(0, positionsList.Count);
-        PhotonNetwork.Instantiate("Player3", positionsList[idx].position, Quaternion.identity);
-        positionsList.RemoveAt(idx);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -131,7 +132,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         RoomRenewal();
         GameManager.instance.SetCount(PhotonNetwork.CurrentRoom.PlayerCount, false);
         PV.RPC("PlayerConnect", RpcTarget.AllBufferedViaServer, 1, otherPlayer.NickName);
-        PV.RPC("ChatRPC", RpcTarget.All, "<color=blue>" + otherPlayer.NickName + "님이 나갔습니다</color>", 1);
+        if(!isGameStart)
+            PV.RPC("ChatRPC", RpcTarget.All, "<color=blue>" + otherPlayer.NickName + "님이 나갔습니다</color>", 1);
+        else
+            PV.RPC("ChatRPC", RpcTarget.All, "<color=blue>" + otherPlayer.NickName + "님이 나갔습니다</color>", 0);
+
     }
 
     // 입장할 방이 없을 시, 방 생성
@@ -147,7 +152,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
 
-    void GameExit() => PV.RPC("GameExitRPC", RpcTarget.All);
+    public void GameExit() => PV.RPC("GameExitRPC", RpcTarget.All);
 
     public int GetPlayerCount()
     {
@@ -179,8 +184,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
             PV.RPC("GameExitRPC", RpcTarget.All);
-        PhotonNetwork.LeaveRoom();
-        PhotonNetwork.LeaveLobby();
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.LeaveLobby();
         Application.Quit();
     }
 
@@ -293,6 +298,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void EndGame()
     {
         isGameStart = false;
+        //victoryUserText.text = nicknameList[0];
         gameOverPanel.SetActive(true);
     }
 
