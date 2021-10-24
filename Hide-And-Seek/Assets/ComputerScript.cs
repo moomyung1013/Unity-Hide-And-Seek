@@ -13,7 +13,8 @@ public class ComputerScript : MonoBehaviourPunCallbacks, IPunObservable
 
     private float v, h;
     private int state;
-    private float time, rotateTime, stopTime;
+    private float time, rotateTime, stopTime, m_currentV;
+    private readonly float m_interpolation = 10;
 
     void Start()
     {
