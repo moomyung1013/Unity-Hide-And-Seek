@@ -29,7 +29,7 @@ public class ComputerScript : MonoBehaviourPunCallbacks, IPunObservable
         v = UnityEngine.Random.Range(-1.0f, 1.0f);
         h = UnityEngine.Random.Range(-1.0f, 1.0f);
     }
-    /*
+    
     void Update()
     {
         switch (state)
@@ -78,7 +78,7 @@ public class ComputerScript : MonoBehaviourPunCallbacks, IPunObservable
                 break;
         }
     }
-    */
+    
 
         
     [PunRPC]
